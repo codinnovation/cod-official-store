@@ -1,0 +1,71 @@
+.homeContainer {
+   width: 100%;
+   height: 100%;
+}
+
+.navigationContainer {
+   width: 100%;
+   height: 10vh;
+}
+
+.navigationContents {
+   width: 60%;
+   margin: 10px auto;
+   display: grid;
+   grid-template-columns: 1fr auto;
+}
+
+.storeNameContainer {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.storeNameContainer .name {
+   background-color: #008374;
+   margin-right: 15px;
+   padding: 7px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.storeNameContainer .name h1 {
+   color: #fff;
+   font-size: 1.3em;
+   font-family: sans-serif;
+}
+
+.searchContainer {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.searchContainer input {
+   width: 250px;
+   height: 37px;
+   border: 1px solid rgba(0, 0, 0, 0.3);
+   padding-left: 10px;
+   border-radius: 5px;
+}
+
+.linkContainer {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+}
+
+.linkContainer .link {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin-left: 45px;
+   cursor: pointer;
+}
+
+.linkContainer .link h1 {
+   font-size: 1em;
+   font-family: sans-serif;
+   font-weight: 400;
+}
