@@ -12,10 +12,86 @@
 }
 
 .profileContainer {
-  height: 50vh;
+  height: 29vh;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
 }
+
+
+.profilePhoto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #eeee;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 10px auto;
+}
+
+.profilePhoto .photo {
+  font-size: 3em;
+}
+
+.profileName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileName h1 {
+  font-family: sans-serif;
+  font-size: 1em;
+}
+
+.profileEmail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.profileEmail h1 {
+  font-size: 1em;
+  font-family: sans-serif;
+  font-weight: 200;
+}
+
+.profileCountry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+
+.profileCountry h1 {
+  font-size: 1em;
+  font-family: sans-serif;
+}
+
+.signOut{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  width: 50%;
+  margin: 50px auto;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.signOut .logoutIcon{
+  font-size: 1em;
+  color: #eee;
+
+}
+
+.signOut h1{
+  font-size: 1em;
+  color: #eee;
+}
+
 
 .mainContainer {
   height: 88vh;
@@ -25,6 +101,7 @@
   scrollbar-color: #eeee;
   scrollbar-width: thin;
 }
+
 .mainContainer::-webkit-scrollbar {
   width: 3px;
 }
@@ -38,6 +115,7 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  cursor: pointer;
 }
 
 
@@ -52,6 +130,7 @@
   font-size: 1.4em;
   font-family: sans-serif;
   margin-top: 5px;
+  color: #008374;
 }
 
 .productHeader .CartIcon {
@@ -70,7 +149,7 @@
 }
 
 .productImage .image {
-  width: 100%;
+  width: 60%;
   height: 100%;
 }
 
@@ -93,11 +172,33 @@
 
 .productDescription .description h1:nth-child(2) {
   font-weight: 400;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
-.rightContainer {
-  height: 30vh;
+.categoriesContainer {
+  height: 50vh;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
+  border-radius: 10px;
 }
+
+.category {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.category .catIcon {
+  font-size: 1em;
+  color: #f85a40;
+}
+
+.category h1 {
+  font-size: 0.9em;
+  font-family: sans-serif;
+  font-weight: 100;
+  margin-left: 5px;
+}
+
