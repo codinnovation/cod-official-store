@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/Home.module.css";
 import CartIcon from "@mui/icons-material/AddShoppingCart";
 import Image from "next/image";
@@ -10,14 +10,97 @@ import FoodBankIcon from "@mui/icons-material/FoodBank";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import RadioIcon from "@mui/icons-material/Radio";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import MoreIcon from "@mui/icons-material/More";
 import { LogoutRounded } from "@mui/icons-material";
-
+import Layout from "../layout";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Index() {
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [user, setUser] = useState(null)
+
+  console.log(user)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 100) {
+          return 0;
+        }
+        const diff = Math.random() * 10;
+        return Math.min(oldProgress + diff, 100);
+      });
+    }, 500);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch("/api/user");
+        if (response.ok) {
+          const userData = await response.json();
+          setUser(userData); // Update user state with fetched data
+        } else {
+          // Handle error cases, e.g., unauthorized access
+          throw new Error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        // Handle error appropriately, e.g., redirect to login page
+        router.push("/login");
+      }
+    };
+
+    fetchUser(); // Invoke fetchUser function when component mounts
+  }, [router]);
+
+  const handleLogout = async (e) => {
+    setIsButtonClicked(true);
+    try {
+      const response = await fetch("/api/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        toast.success("Logout Successful");
+        router.push("/login");
+        setIsButtonClicked(false);
+      } else {
+        toast.error("Logout Failed");
+        setIsButtonClicked(false);
+      }
+    } catch (error) {
+      toast.error("Error Occurred");
+      setIsButtonClicked(false);
+    }
+  };
+
   return (
     <>
+      {isButtonClicked && (
+        <>
+          <div className={styles.circle_container}>
+            <Box sx={{ width: "70%" }}>
+              <LinearProgress variant="determinate" value={progress} />
+            </Box>
+          </div>
+        </>
+      )}
+      <Layout />
       <div className={styles.homeContainer}>
         <div className={styles.homeContents}>
           <div className={styles.categoriesContainer}>
@@ -99,7 +182,7 @@ function Index() {
 
               <div className={styles.productImage}>
                 <Image
-                  src="/computer.jpg"
+                  src="https://firebasestorage.googleapis.com/v0/b/cod-shop-c1874.appspot.com/o/fridge.jpg?alt=media&token=3f4eabb5-a3a0-4d7e-a1cb-a77a3627d3cd"
                   alt="product-image"
                   className={styles.image}
                   width={900}
@@ -159,20 +242,21 @@ function Index() {
             </div>
 
             <div className={styles.profileEmail}>
-              <h1>kwabenasakyi450@gmail.com</h1>
+              <h1>{user?.user.email}</h1>
             </div>
 
             <div className={styles.profileCountry}>
-              <h1>Ghana, Kumasi</h1>
+              <h1>{user?.user.phoneNumber}</h1>
             </div>
 
-            <div className={styles.signOut}>
+            <div className={styles.signOut} onClick={handleLogout}>
               <LogoutRounded className={styles.logoutIcon} />
               <h1>Logout</h1>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }
