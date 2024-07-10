@@ -10,7 +10,6 @@ import FoodBankIcon from "@mui/icons-material/FoodBank";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import RadioIcon from "@mui/icons-material/Radio";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import MoreIcon from "@mui/icons-material/More";
 import { LogoutRounded } from "@mui/icons-material";
 import Layout from "../layout";
@@ -64,7 +63,7 @@ function Index() {
     };
 
     fetchUser(); // Invoke fetchUser function when component mounts
-  }, []);
+  }, [router]);
 
   const handleLogout = async (e) => {
     setIsButtonClicked(true);

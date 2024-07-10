@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useRouter } from "next/router";
-import { auth, sendPasswordResetEmail } from "../../../firebase.config";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -84,19 +83,6 @@ function LoginForm() {
     }
   };
 
-  const resetPassword = async () => {
-    if (!userCredentials.email) {
-      toast.error("Please enter your email address");
-      return;
-    }
-
-    try {
-      await sendPasswordResetEmail(auth, userCredentials.email);
-      toast.success("Password reset email sent. Please check your email.");
-    } catch (error) {
-      toast.error("Error sending password reset email");
-    }
-  };
 
   return (
     <>
