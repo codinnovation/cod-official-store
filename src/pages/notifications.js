@@ -1,6 +1,6 @@
 // components/NotificationPermission.js
 import { useEffect } from 'react';
-import { messaging, getToken, onMessage } from '../pages/firebase';
+import { messaging, getToken, onMessage } from '../../firebase.config';
 
 const NotificationPermission = () => {
   useEffect(() => {
