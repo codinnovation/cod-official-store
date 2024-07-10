@@ -64,8 +64,13 @@
    cursor: pointer;
 }
 
+.linkContainer .link .icon{
+   color: #f85a40;
+   font-size: 1.4em;
+}
+
 .linkContainer .link h1 {
-   font-size: 1em;
+   font-size: 0.9em;
    font-family: sans-serif;
    font-weight: 400;
 }
