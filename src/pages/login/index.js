@@ -6,7 +6,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from '@mui/material/CircularProgress';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { auth } from "../../../firebase.config";
@@ -98,8 +98,8 @@ function LoginForm() {
       {isSubmitting && (
         <>
           <div className={styles.loadingContainer}>
-            <Box sx={{ width: "70%" }}>
-              <LinearProgress variant="determinate" value={progress} />
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
             </Box>
           </div>
         </>

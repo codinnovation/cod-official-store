@@ -28,7 +28,7 @@ export default withSession(async function handler(req, res) {
       const user = {
         id: userCredential.user.uid,
         email: userCredential.user.email,
-        displayName: userCredential.user.name, // Use the provided name
+        displayName: name, // Use the provided name
         phoneNumber: phoneNumber // Use the provided phone number
       };
 
