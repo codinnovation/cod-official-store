@@ -70,7 +70,7 @@
   font-family: sans-serif;
 }
 
-.signOut{
+.signOut {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,13 +81,13 @@
   border-radius: 5px;
 }
 
-.signOut .logoutIcon{
+.signOut .logoutIcon {
   font-size: 1em;
   color: #eee;
 
 }
 
-.signOut h1{
+.signOut h1 {
   font-size: 1em;
   color: #eee;
 }
@@ -202,3 +202,71 @@
   margin-left: 5px;
 }
 
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+@media (max-width:700px) {
+  .homeContents {
+    grid-template-columns: auto;
+    width: 97%;
+    height: 100%;
+  }
+
+  .profileContainer {
+    display: none;
+  }
+
+  .categoriesContainer {
+    display: none;
+  }
+
+  .productHeader {
+    width: 90%;
+  }
+
+  .productHeader h1 {
+    font-size: 1em;
+  }
+
+  .productHeader .CartIcon {
+    font-size: 1.2em;
+  }
+
+  .productImage {
+    width: 90%;
+  }
+
+  .productImage .image {
+    width: 70%;
+    height: 100%;
+  }
+
+  .productDescription {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .productDescription .description h1:nth-child(1) {
+    font-weight: 300;
+    font-size: 1em;
+    text-align: left;
+  }
+  .productDescription .description h1:nth-child(2) {
+    font-weight: 300;
+    font-size: 1em;
+    text-align: left;
+  }
+
+
+}
