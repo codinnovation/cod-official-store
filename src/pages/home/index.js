@@ -14,35 +14,43 @@ import MoreIcon from "@mui/icons-material/More";
 import { LogoutRounded } from "@mui/icons-material";
 import Layout from "../layout";
 import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ref, push, get } from "firebase/database";
+import { auth, db } from "../../../firebase.config";
 
 function Index() {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [user, setUser] = useState(null)
-
-  console.log(user)
+  const [productData, setProductData] = useState([]);
+  const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
+    const fetchData = async () => {
+      try {
+        const dbRef = ref(db, "sneakers");
+        const response = await get(dbRef);
+        const data = response.val();
+
+        if (data && typeof data === "object") {
+          const dataArray = Object.entries(data).map(([key, value]) => ({
+            key,
+            ...value,
+          }));
+          setProductData(dataArray);
+        } else {
+          setProductData([]);
         }
-        const diff = Math.random() * 10;
-        return Math.min(oldProgress + diff, 100);
-      });
-    }, 500);
-
-    return () => {
-      clearInterval(timer);
+      } catch (error) {
+        console.error("Error fetching data:");
+        setProductData([]);
+      }
     };
-  }, []);
 
-  const router = useRouter();
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -93,9 +101,9 @@ function Index() {
     <>
       {isButtonClicked && (
         <>
-          <div className={styles.circle_container}>
-            <Box sx={{ width: "70%" }}>
-              <LinearProgress variant="determinate" value={progress} />
+          <div className={styles.loadingContainer}>
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
             </Box>
           </div>
         </>
@@ -105,7 +113,9 @@ function Index() {
         <div className={styles.homeContents}>
           <div className={styles.categoriesContainer}>
             <div className={styles.category}>
-              <SpaIcon className={styles.catIcon} />
+              <SpaIcon
+                className={styles.catIcon}
+              />
               <h1>Health & Beauty</h1>
             </div>
 
@@ -144,6 +154,7 @@ function Index() {
               <h1>Other Categories</h1>
             </div>
           </div>
+
           <div className={styles.mainContainer}>
             <div className={styles.productContainer}>
               <div className={styles.productHeader}>
@@ -205,13 +216,13 @@ function Index() {
 
             <div className={styles.productContainer}>
               <div className={styles.productHeader}>
-                <h1>Mini Fridge</h1>
+                <h1>Bronze Tone Lotion - 300ml</h1>
                 <CartIcon className={styles.CartIcon} />
               </div>
 
               <div className={styles.productImage}>
                 <Image
-                  src="/fridge.jpg"
+                  src="https://firebasestorage.googleapis.com/v0/b/cod-shop-c1874.appspot.com/o/Bronze-Maxi-Tone-Lotion-200ml.png?alt=media&token=28cbe6ad-c69b-4b8e-9d38-0f7e2df9295a"
                   alt="product-image"
                   className={styles.image}
                   width={900}
@@ -222,12 +233,12 @@ function Index() {
               <div className={styles.productDescription}>
                 <div className={styles.description}>
                   <h1>Price:</h1>
-                  <h1>Ghc 260.00</h1>
+                  <h1>Ghc 30.00</h1>
                 </div>
 
                 <div className={styles.description}>
                   <h1>Description:</h1>
-                  <h1>Mini Fridge with Freezer</h1>
+                  <h1>Bronze Tone Lotion - 300ml</h1>
                 </div>
               </div>
             </div>
@@ -256,7 +267,9 @@ function Index() {
           </div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
+
+    
     </>
   );
 }

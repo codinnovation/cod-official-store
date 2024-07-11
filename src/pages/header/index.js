@@ -8,6 +8,16 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import Tooltip from "@mui/material/Tooltip";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
+import MenuIcon from "@mui/icons-material/Menu";
+import Person from "@mui/icons-material/Person";
+import SpaIcon from "@mui/icons-material/Spa";
+import DeckIcon from "@mui/icons-material/Deck";
+import ComputerIcon from "@mui/icons-material/Computer";
+import FoodBankIcon from "@mui/icons-material/FoodBank";
+import DiamondIcon from "@mui/icons-material/Diamond";
+import RadioIcon from "@mui/icons-material/Radio";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import MoreIcon from "@mui/icons-material/More";
 import Box from "@mui/material/Box";
 import {
   Typography,
@@ -22,7 +32,7 @@ import {
 function Index() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-
+  const [openMenu, setOpenMenu] = useState(false);
 
   const handleOpenCart = () => {
     setIsCartOpen(true);
@@ -39,14 +49,14 @@ function Index() {
     setIsNotificationsOpen(false);
   };
 
-
   const cartItems = [
     {
       id: 1,
       name: "Jordan 9 Retro",
       desrciptions: "This jordan 9 Retro all sizes",
       price: "$12.00",
-      image: "https://firebasestorage.googleapis.com/v0/b/cod-shop-c1874.appspot.com/o/fridge.jpg?alt=media&token=3f4eabb5-a3a0-4d7e-a1cb-a77a3627d3cd"
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/cod-shop-c1874.appspot.com/o/fridge.jpg?alt=media&token=3f4eabb5-a3a0-4d7e-a1cb-a77a3627d3cd",
     },
 
     {
@@ -54,7 +64,8 @@ function Index() {
       name: "Jordan 9 Retro",
       desrciptions: "This jordan 9 Retro all sizes",
       price: "$12.00",
-      image: "https://firebasestorage.googleapis.com/v0/b/cod-shop-c1874.appspot.com/o/fridge.jpg?alt=media&token=3f4eabb5-a3a0-4d7e-a1cb-a77a3627d3cd"
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/cod-shop-c1874.appspot.com/o/fridge.jpg?alt=media&token=3f4eabb5-a3a0-4d7e-a1cb-a77a3627d3cd",
     },
 
     {
@@ -62,10 +73,10 @@ function Index() {
       name: "Jordan 9 Retro",
       desrciptions: "This jordan 9 Retro all sizes",
       price: "$12.00",
-      image: "https://firebasestorage.googleapis.com/v0/b/cod-shop-c1874.appspot.com/o/fridge.jpg?alt=media&token=3f4eabb5-a3a0-4d7e-a1cb-a77a3627d3cd"
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/cod-shop-c1874.appspot.com/o/fridge.jpg?alt=media&token=3f4eabb5-a3a0-4d7e-a1cb-a77a3627d3cd",
     },
   ];
-
 
   const notifications = [
     {
@@ -86,6 +97,9 @@ function Index() {
         <div className={styles.navigationContainer}>
           <div className={styles.navigationContents}>
             <div className={styles.storeNameContainer}>
+              <div className={styles.menuIcon}>
+                <MenuIcon onClick={() => setOpenMenu(true)} />
+              </div>
               <div className={styles.name}>
                 <h1>COD STORE</h1>
               </div>
@@ -204,22 +218,38 @@ function Index() {
         </Box>
       </Modal>
 
-
-
-
       <Modal
         open={isNotificationsOpen}
         onClose={handleCloseNotifications}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 600, maxWidth: '90%', bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 600,
+            maxWidth: "90%",
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
           <Typography variant="h5" id="modal-modal-title" gutterBottom>
             Notifications
           </Typography>
           <Divider />
 
-          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', marginTop: 2 }}>
+          <List
+            sx={{
+              width: "100%",
+              maxWidth: 360,
+              bgcolor: "background.paper",
+              marginTop: 2,
+            }}
+          >
             {notifications.map((notification) => (
               <ListItem key={notification.id} disablePadding>
                 <ListItemText
@@ -230,14 +260,87 @@ function Index() {
             ))}
           </List>
 
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 2 }}>
-            <Button onClick={handleCloseNotifications} color="primary" variant="contained">
+          <Box
+            sx={{ display: "flex", justifyContent: "flex-end", marginTop: 2 }}
+          >
+            <Button
+              onClick={handleCloseNotifications}
+              color="primary"
+              variant="contained"
+            >
               Close
             </Button>
           </Box>
         </Box>
       </Modal>
 
+      {openMenu && (
+        <>
+          <div className={styles.menuContainer}>
+            <div className={styles.menuHeader}>
+              <h1>Categories</h1>
+              <h1 onClick={() => setOpenMenu(false)}>&times;</h1>
+            </div>
+
+            <div className={styles.menuNavigation}>
+              <div className={styles.menuNav}>
+                <FoodBankIcon className={styles.catIcon} />
+                <h1>Supermarket</h1>
+              </div>
+
+              <div className={styles.menuNav}>
+                <FitnessCenterIcon className={styles.catIcon} />
+                <h1>Sporting Goods</h1>
+              </div>
+
+              <div className={styles.menuNav}>
+                <MoreIcon className={styles.catIcon} />
+                <h1>Other Categories</h1>
+              </div>
+
+              <div className={styles.menuNav}>
+                <DiamondIcon className={styles.catIcon} />
+                <h1>Fashion</h1>
+              </div>
+
+              <div className={styles.menuNav}>
+                <ComputerIcon className={styles.catIcon} />
+                <h1>Computing</h1>
+              </div>
+
+              <div className={styles.menuNav}>
+                <DeckIcon className={styles.catIcon} />
+                <h1>Home & Office</h1>
+              </div>
+              <div className={styles.menuNav}>
+                <SpaIcon className={styles.catIcon} />
+                <h1>Health & Beauty</h1>
+              </div>
+            </div>
+
+            <div className={styles.actionContainer}>
+             
+
+               
+
+                <div className={styles.link} onClick={handleNotificationsClick}>
+                  <NotificationsIcon className={styles.icon} />
+                  <h1>Notifications</h1>
+                </div>
+
+                <div className={styles.link}>
+                  <PhoneIcon className={styles.icon} />
+                  <h1>Contact</h1>
+                </div>
+
+                <div className={styles.link}>
+                  <PersonIcon className={styles.icon} />
+                  <h1>Me</h1>
+                </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }
