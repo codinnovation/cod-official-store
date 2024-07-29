@@ -2,7 +2,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import withSession from "./session";
 import { auth } from "../../../firebase.config";
 import { updateProfile } from "firebase/auth";
-import { sendEmailVerification } from "firebase/auth";
 
 export default withSession(async function handler(req, res) {
   if (req.method === "POST") {
@@ -18,18 +17,10 @@ export default withSession(async function handler(req, res) {
       // Update user profile with display name
       await updateProfile(userCredential.user, { displayName: name });
 
-      // Update user profile with phone number
-      await updateProfile(userCredential.user, { phoneNumber: phoneNumber });
-
-      // Send email verification
-      await sendEmailVerification(userCredential.user);
-
-      // Construct user object with necessary details
       const user = {
         id: userCredential.user.uid,
         email: userCredential.user.email,
         displayName: name, // Use the provided name
-        phoneNumber: phoneNumber // Use the provided phone number
       };
 
       // Store user data in the session
