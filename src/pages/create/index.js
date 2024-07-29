@@ -34,7 +34,6 @@ function LoginForm() {
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
-    phoneNumber: "",
     name: "",
   });
 
@@ -54,7 +53,6 @@ function LoginForm() {
     let data = {
       email: userCredentials.email,
       password: userCredentials.password,
-      phoneNumber: userCredentials.phoneNumber,
       displayName: userCredentials.name,
     };
 
@@ -143,16 +141,6 @@ function LoginForm() {
                 )}
               </div>
 
-              <div className={styles.authFormInput}>
-                <label>Phone Number</label>
-                <input
-                  type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={userCredentials.phoneNumber}
-                  onChange={handleInputChange}
-                />
-              </div>
 
               <div className={styles.authFormInput}>
                 <label>Display Name</label>

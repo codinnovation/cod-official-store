@@ -13,7 +13,6 @@ async function handler(req, res) {
   } else {
     res.status(401).json({
       isLoggedIn: false,
-      isTwoFACompleted: false,
     });
   }
 }

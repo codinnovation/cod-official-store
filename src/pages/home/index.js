@@ -20,12 +20,35 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ref, push, get } from "firebase/database";
 import { auth, db } from "../../../firebase.config";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 function Index() {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [productData, setProductData] = useState([]);
   const [user, setUser] = useState(null);
   const router = useRouter();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,14 +81,12 @@ function Index() {
         const response = await fetch("/api/user");
         if (response.ok) {
           const userData = await response.json();
-          setUser(userData); // Update user state with fetched data
+          setUser(userData);
         } else {
-          // Handle error cases, e.g., unauthorized access
           throw new Error("Failed to fetch user data");
         }
       } catch (error) {
         console.error("Error fetching user:", error);
-        // Handle error appropriately, e.g., redirect to login page
         router.push("/login");
       }
     };
@@ -113,9 +134,7 @@ function Index() {
         <div className={styles.homeContents}>
           <div className={styles.categoriesContainer}>
             <div className={styles.category}>
-              <SpaIcon
-                className={styles.catIcon}
-              />
+              <SpaIcon className={styles.catIcon} />
               <h1>Health & Beauty</h1>
             </div>
 
@@ -159,7 +178,7 @@ function Index() {
             <div className={styles.productContainer}>
               <div className={styles.productHeader}>
                 <h1>Jordan 9 Retro</h1>
-                <CartIcon className={styles.CartIcon} />
+                <CartIcon className={styles.CartIcon} onClick={handleOpen} />
               </div>
 
               <div className={styles.productImage}>
@@ -188,7 +207,7 @@ function Index() {
             <div className={styles.productContainer}>
               <div className={styles.productHeader}>
                 <h1>Lenovo ThinkPad</h1>
-                <CartIcon className={styles.CartIcon} />
+                <CartIcon className={styles.CartIcon} onClick={handleOpen}/>
               </div>
 
               <div className={styles.productImage}>
@@ -217,7 +236,7 @@ function Index() {
             <div className={styles.productContainer}>
               <div className={styles.productHeader}>
                 <h1>Bronze Tone Lotion - 300ml</h1>
-                <CartIcon className={styles.CartIcon} />
+                <CartIcon className={styles.CartIcon} onClick={handleOpen}/>
               </div>
 
               <div className={styles.productImage}>
@@ -269,7 +288,21 @@ function Index() {
       </div>
       <ToastContainer />
 
-    
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: 300 }}>
+          <h2 id="child-modal-title">Save Items</h2>
+          <p id="child-modal-description">
+            Are you sure to save this item and buy later?
+          </p>
+          <Button>Add</Button>
+          <Button onClick={handleClose}>Close</Button>
+        </Box>
+      </Modal>
     </>
   );
 }

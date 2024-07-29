@@ -162,11 +162,7 @@ function LoginForm() {
             </form>
           </div>
         </div>
-        <div className={styles.footerContainer}>
-          <p>
-            &copy;{new Date().getFullYear()} - COD Shop | All Rights Reserved
-          </p>
-        </div>
+      
       </div>
       <ToastContainer />
     </>
